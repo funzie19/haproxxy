@@ -1,0 +1,1 @@
+default['haproxy']['user'] = 'haproxy1'
