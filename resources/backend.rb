@@ -1,4 +1,4 @@
-property :backend_hash, :kind_of => Hash, :required => false, :default => {}
+property :endpoints, :kind_of => Hash, :required => false, :default => {}
 property :template_source, String, name_property: true
 
 action :set_backend do
@@ -8,7 +8,7 @@ action :set_backend do
 		owner 'haproxy'
 		group 'haproxy'
 		variables( 
-			backend_hash: new_resource.backend_hash
+			endpoints: new_resource.endpoints
 		)
 		cookbook 'haproxy'
 	end
