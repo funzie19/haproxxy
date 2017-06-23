@@ -9,8 +9,8 @@
 # - Configure default
 # - Configure backend
 
-describe package 'haproxy' do |variable|
-	it { should be_installed }
+describe package 'haproxy' do
+  it { should be_installed }
 end
 
 describe service 'haproxy' do
@@ -19,6 +19,6 @@ describe service 'haproxy' do
 end
 
 # Below tests requirements for assignment
-    describe port(80) do
-    	it { should be_listening }
-    end
+describe port(80) do
+  it { should be_listening }
+end

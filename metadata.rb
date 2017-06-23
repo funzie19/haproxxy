@@ -9,5 +9,3 @@ supports 'centos'
 chef_version '>= 12.1' if respond_to?(:chef_version)
 issues_url 'https://github.com/funzie19/haproxy/issues'
 source_url 'https://github.com/funzie19/haproxy'
-
-depends 'firewall', '~> 2.6.2'

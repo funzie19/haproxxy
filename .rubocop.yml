@@ -1,3 +1,5 @@
-AllCops:
-  LineLenght:
-    Max: 160 
+  Style/Encoding:
+    Enabled: false
+
+  Metrics/LineLength:
+    Max: 99
