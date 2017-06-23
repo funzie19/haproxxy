@@ -21,20 +21,20 @@ action :start do
 end
 
 action :configure do
-	template '/etc/haproxy/haproxy.cfg' do
-	source 'default.conf.erb'
-	owner 'haproxy'
-	group 'haproxy'
-	variables( 
-		chroot: new_resource.chroot,
-		pidfile: new_resource.pidfile,
-		maxconn: new_resource.maxconn,
-		user: new_resource.user,
-		group: new_resource.group,
-		mode: new_resource.mode,
-		log: new_resource.log,
-		retry_count: new_resource.retries,
-		default_maxconn: new_resource.default_maxconn
-	)
-end	
+    template '/etc/haproxy/haproxy.cfg' do
+    source 'default.conf.erb'
+    owner 'haproxy'
+    group 'haproxy'
+    variables(
+      chroot: new_resource.chroot,
+      pidfile: new_resource.pidfile,
+      maxconn: new_resource.maxconn,
+      user: new_resource.user,
+      group: new_resource.group,
+      mode: new_resource.mode,
+      log: new_resource.log,
+      retry_count: new_resource.retries,
+      default_maxconn: new_resource.default_maxconn
+    )
+  end
 end

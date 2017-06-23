@@ -1,1 +1,1 @@
-use_inline_resources 
+use_inline_resources

@@ -1,0 +1,3 @@
+AllCops:
+  LineLenght:
+    Max: 160 
