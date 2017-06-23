@@ -12,6 +12,8 @@ provisioner:
 verifier:
   name: inspec
 
+network:
+  - ["forwarded_port", {guest: 1984, host: 1984}]
 platforms:
 #  - name: ubuntu-16.04
   - name: centos-7.3

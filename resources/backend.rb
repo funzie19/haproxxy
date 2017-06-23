@@ -12,4 +12,14 @@ action :set_backend do
 		)
 		cookbook 'haproxy'
 	end
+
+	template '/etc/sysconfig/haproxy' do
+		source 'options.conf'
+		owner 'haproxy'
+		group 'haproxy'
+		variables( 
+			endpoints: new_resource.endpoints
+		)
+		cookbook 'haproxy'
+	end	
 end

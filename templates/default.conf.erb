@@ -25,11 +25,11 @@ global
     #
     log         127.0.0.1 local2
 
-    chroot      /var/lib/haproxy
-    pidfile     /var/run/haproxy.pid
-    maxconn     4000
-    user        <%= node['haproxy']['default']['user'] %>
-    group       haproxy
+    chroot      <%= @chroot %>
+    pidfile     <%= @pidfile %>
+    maxconn     <%= @maxconn %>
+    user        <%= @user %>
+    group       <%= @group %>
     daemon
 
     # turn on stats unix socket
@@ -40,14 +40,14 @@ global
 # use if not designated in their block
 #---------------------------------------------------------------------
 defaults
-    mode                    http
-    log                     global
+    mode                    <%= @mode %>
+    log                     <%= @log %>
     option                  httplog
     option                  dontlognull
     option http-server-close
     option forwardfor       except 127.0.0.0/8
     option                  redispatch
-    retries                 3
+    retries                 <%= @retries %>
     timeout http-request    10s
     timeout queue           1m
     timeout connect         10s
@@ -55,23 +55,12 @@ defaults
     timeout server          1m
     timeout http-keep-alive 10s
     timeout check           10s
-    maxconn                 3000
-    
-#---------------------------------------------------------------------
-# main frontend which proxys to the backends
-#---------------------------------------------------------------------
-frontend  main *:5000
-    acl url_static       path_beg       -i /static /images /javascript /stylesheets
-    acl url_static       path_end       -i .jpg .gif .png .css .js
+    maxconn                 <%= @maxconn %>
 
-    use_backend static          if url_static
-    default_backend             app
+    frontend google2
+    bind *:80
+    default_backend google_backend
 
-#---------------------------------------------------------------------
-# round robin balancing between the various backends
-#---------------------------------------------------------------------
-backend app
+backend google_backend
     balance     roundrobin
-    <% @backend_hash.each do | server, server_info | %>
-        server <%= server_info[:server_name] %> <%= server_info[:server_address] %>:<%= server_info[:server_port] %> <%= server_info[:extra_params] %>
-    <% end %>
+        server google2 google.com:80 check
