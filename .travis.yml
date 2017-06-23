@@ -14,9 +14,12 @@ branches:
 
 services: docker
 
-script:
-  - chef exec rake travis
-  
+env:
+  matrix:
+   - OS_INSTANCE=centos-7.3
+
+script: .kitchen.yml /opt/chefdk/embedded/bin/kitchen verify ${OS_INSTANCE}
+
 notifications:
   email:
-    - joseph@yourcgi.com.com
+    - joseph@yourcgi.com
