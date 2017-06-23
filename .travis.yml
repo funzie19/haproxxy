@@ -1,0 +1,15 @@
+sudo: required
+dist: trusty
+
+addons:
+  apt:
+    sources:
+      - chef-stable-trusty
+    packages:
+      - chefdk
+      
+branches:
+  only:
+    - master
+
+services: docker
