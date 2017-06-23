@@ -23,3 +23,4 @@ action :set_backend do
     cookbook 'haproxy'
   end
 end
+
