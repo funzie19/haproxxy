@@ -18,8 +18,21 @@ env:
   matrix:
    - OS_INSTANCE=centos-7.3
 
+before_script:
+  - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - /opt/chefdk/embedded/bin/chef --version
+  - /opt/chefdk/embedded/bin/cookstyle --version
+  - /opt/chefdk/embedded/bin/foodcritic --version
+  
 script: KITCHEN_LOCAL_YAML=.kitchen.yml /opt/chefdk/embedded/bin/kitchen verify ${OS_INSTANCE}
 
+matrix:
+  include:
+    - script:
+      - /opt/chefdk/bin/chef exec rake
+      env: UNIT_AND_LINT=1
+      
 notifications:
   email:
     - joseph@yourcgi.com
