@@ -13,3 +13,10 @@ branches:
     - master
 
 services: docker
+
+script:
+  - chef exec rake travis
+  
+  notifications:
+  email:
+    - joseph@yourcgi.com.com
