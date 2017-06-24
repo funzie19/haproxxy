@@ -7,7 +7,10 @@ addons:
       - chef-stable-trusty
     packages:
       - chefdk
-      
+
+# Don't `bundle install` which takes about 1.5 mins
+install: echo "skip bundle install"
+
 branches:
   only:
     - master
@@ -16,7 +19,7 @@ services: docker
 
 env:
   matrix:
-   - OS_INSTANCE=centos-7.3
+   - INSTANCE=package-centos-7
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
@@ -24,15 +27,11 @@ before_script:
   - /opt/chefdk/embedded/bin/chef --version
   - /opt/chefdk/embedded/bin/cookstyle --version
   - /opt/chefdk/embedded/bin/foodcritic --version
-  
-script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen verify ${OS_INSTANCE}
+
+script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
 
 matrix:
   include:
     - script:
       - /opt/chefdk/bin/chef exec delivery local all
       env: UNIT_AND_LINT=1
-      
-notifications:
-  email:
-    - joseph@yourcgi.com
