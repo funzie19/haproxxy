@@ -1,18 +1,39 @@
-rvm: 2.2
 sudo: required
-cache: bundler
-services:
-  - docker
-before_install:
-  - |
-    curl -L https://www.getchef.com/chef/install.sh |
-      sudo bash -s -- -P chefdk -v 0.10.0
-  - chef exec gem install kitchen-docker
-  # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
+dist: trusty
+
+addons:
+  apt:
+    sources:
+      - chef-stable-trusty
+    packages:
+      - chefdk
+      
+branches:
+  only:
+    - master
+
+services: docker
+
+env:
+  matrix:
+   - OS_INSTANCE=centos-7.3
+
+before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - /opt/chefdk/embedded/bin/chef --version
+  - /opt/chefdk/embedded/bin/cookstyle --version
+  - /opt/chefdk/embedded/bin/foodcritic --version
+  
+script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen verify ${OS_INSTANCE}
 
-script: chef exec make travis
-
+matrix:
+  include:
+    - script:
+      - KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen verify ${OS_INSTANCE}
+      - /opt/chefdk/bin/chef exec delivery local all
+      env: UNIT_AND_LINT=1
+      
 notifications:
   email:
     - joseph@yourcgi.com
