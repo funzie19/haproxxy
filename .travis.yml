@@ -16,7 +16,7 @@ services: docker
 
 env:
   matrix:
-   - OS_INSTANCE=centos-7.3
+   - OS_INSTANCE=centos-7
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
@@ -30,7 +30,6 @@ script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen 
 matrix:
   include:
     - script:
-      - KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen verify ${OS_INSTANCE}
       - /opt/chefdk/bin/chef exec delivery local all
       env: UNIT_AND_LINT=1
       
