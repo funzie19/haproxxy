@@ -3,3 +3,6 @@
 
   Metrics/LineLength:
     Max: 99
+
+  Style/EndOfLine:
+    EnforcedStyle: lg

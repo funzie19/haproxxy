@@ -35,13 +35,13 @@ haproxy_endpoints 'haproxy' do
           server_name: 'google2',
           server_address: 'google.com',
           server_port: '80',
-          extra_params: 'check',
+          extra_params: 'check'
         },
         'yahoo' => {
           server_name: 'yahoo',
           server_address: 'yahoo.com',
           server_port: '80',
-          extra_params: 'check',
+          extra_params: 'check'
         }
       }
     }
