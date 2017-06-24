@@ -69,7 +69,7 @@ describe 'haproxy::default' do
     end
 
     it 'checks for custom resource to set endpoints' do
-      expect(chef_run).to setup_backend_haproxy_endpoints('haproxy')
+      expect(chef_run).to setup_endpoint_haproxy_endpoints('haproxy')
     end
   end
 end
