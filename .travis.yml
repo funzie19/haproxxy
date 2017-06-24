@@ -1,3 +1,4 @@
+# http://www.invalidchecksum.net/2015/08/travis-ci-gce-docker-test-kitchen.html
 language: ruby
 
 sudo: required
@@ -5,10 +6,18 @@ sudo: required
 services:
   - docker
 
+# attempt to speed up build by installing Gecode 3.7.3 from Ubuntu 12.04
+before_install:
+  - sudo apt-get update
+
+install:
+  - sudo dpkg -i *.deb
+  - bundle install
+
 script:
   - bundle exec rake style
-#  - bundle exec rake unit
-#  - bundle exec kitchen test -d never
+  - bundle exec rake unit
+  - bundle exec kitchen test -d never
 
 env:
   global:
