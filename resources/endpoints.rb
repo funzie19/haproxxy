@@ -2,7 +2,7 @@ property :endpoint_list, Hash, required: true, default: {}
 property :template_source, String, name_property: true
 property :options_file_path, String, name_property: true
 
-action :set_backend do
+action :setup_endpoint do
   template options_file_path do
     source template_source
     owner 'haproxy'

@@ -39,7 +39,7 @@ haproxy_endpoints 'haproxy' do
       },
     }
   )
-  action :set_backend
+  action :setup_endpoint
 end
 
 haproxy_install 'haproxy' do
