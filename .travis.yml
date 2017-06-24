@@ -14,10 +14,6 @@ branches:
 
 services: docker
 
-env:
-  matrix:
-   - OS_INSTANCE=centos-7
-
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
@@ -25,13 +21,9 @@ before_script:
   - /opt/chefdk/embedded/bin/cookstyle --version
   - /opt/chefdk/embedded/bin/foodcritic --version
   
-script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen verify ${OS_INSTANCE}
-
-matrix:
-  include:
-    - script:
-      - /opt/chefdk/bin/chef exec delivery local all
-      env: UNIT_AND_LINT=1
+script: 
+  - KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen verify centos-7
+  - /opt/chefdk/bin/chef exec delivery local all
       
 notifications:
   email:
