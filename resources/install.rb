@@ -8,19 +8,11 @@ property :log, String, required: false, default: 'global'
 property :retry_count, Integer, required: false, default: 3
 property :default_maxconn, Integer, required: false, default: 3000
 
-action :install do
+action :configure do
   package 'haproxy' do
     action :install
   end
-end
 
-action :start do
-  service 'haproxy' do
-    action :start
-  end
-end
-
-action :configure do
   template '/etc/haproxy/haproxy.cfg' do
     source 'default.conf.erb'
     owner 'haproxy'
@@ -36,5 +28,16 @@ action :configure do
       retry_count: new_resource.retries,
       default_maxconn: new_resource.default_maxconn
     )
+  end
+
+  # Start and enable
+  service 'haproxy' do
+    action [:enable, :start]
+  end
+end
+
+action :restart do
+  service 'haproxy' do
+    action :restart
   end
 end

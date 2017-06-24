@@ -10,14 +10,6 @@
 # - Seperate frontend?
 # - Restart after install
 
-# Install haproxy
-package 'haproxy'
-
-# Start and enable
-service 'haproxy' do
-  action [:enable, :start]
-end
-
 haproxy_install 'haproxy' do
   action :configure
 end
@@ -40,7 +32,7 @@ haproxy_endpoints 'haproxy' do
         },
         'yahoo' => {
           server_name: 'yahoo',
-          server_address: 'yahoo.com',
+          server_address: 'google.com',
           server_port: '80',
           extra_params: 'check',
         },
@@ -48,4 +40,8 @@ haproxy_endpoints 'haproxy' do
     }
   )
   action :set_backend
+end
+
+haproxy_install 'haproxy' do
+  action :restart
 end
