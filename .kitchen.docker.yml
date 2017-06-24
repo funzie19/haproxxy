@@ -11,6 +11,6 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[default]
+      - recipe[haproxy]
     includes:
       - centos-7
