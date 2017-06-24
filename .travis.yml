@@ -23,7 +23,12 @@ before_script:
   
 script: 
   - KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen verify centos-7
-  - /opt/chefdk/bin/chef exec delivery local all
+
+matrix:
+  include:
+    - script:
+      - /opt/chefdk/bin/chef exec delivery local all
+      env: UNIT_AND_LINT=1
       
 notifications:
   email:
