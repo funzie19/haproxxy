@@ -6,12 +6,10 @@ sudo: required
 services:
   - docker
 
-# attempt to speed up build by installing Gecode 3.7.3 from Ubuntu 12.04
 before_install:
   - sudo apt-get update
 
 install:
-  - sudo dpkg -i *.deb
   - bundle install
 
 script:
