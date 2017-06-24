@@ -5,9 +5,6 @@ sudo: required
 services:
   - docker
 
-install:
-  - bundle install
-
 script:
   - bundle exec rake style
 #  - bundle exec rake unit
