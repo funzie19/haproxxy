@@ -47,7 +47,7 @@ defaults
     option http-server-close
     option forwardfor       except 127.0.0.0/8
     option                  redispatch
-    retries                 <%= @retries %>
+    retries                 <%= @retry_count %>
     timeout http-request    10s
     timeout queue           1m
     timeout connect         10s
@@ -56,11 +56,3 @@ defaults
     timeout http-keep-alive 10s
     timeout check           10s
     maxconn                 <%= @maxconn %>
-
-    frontend google2
-    bind *:80
-    default_backend google_backend
-
-backend google_backend
-    balance     roundrobin
-        server google2 google.com:80 check

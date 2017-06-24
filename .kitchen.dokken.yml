@@ -1,12 +1,12 @@
 ---
 driver:
-  name: vagrant
+  name: dokken
+
+transport:
+  name: dokken
 
 provisioner:
-  name: chef_zero
-  # You may wish to disable always updating cookbooks in CI or other testing environments.
-  # For example:
-  #   always_update_cookbooks: <%= !ENV['CI'] %>
+  name: dokken
   always_update_cookbooks: true
 
 verifier:

@@ -8,6 +8,7 @@
 # - Check config before start
 # - Restart after config check
 # - Seperate frontend?
+# - Restart after install
 
 # Install haproxy
 package 'haproxy'
