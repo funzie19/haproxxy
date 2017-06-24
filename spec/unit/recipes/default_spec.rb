@@ -18,17 +18,5 @@ describe 'haproxy::default' do
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
-
-    it 'installs haproxy' do
-      expect(chef_run).to install_package 'haproxy'
-    end
-
-    it 'enables the haproxy service' do
-      expect(chef_run).to enable_service 'haproxy'
-    end
-
-    it 'starts the haproxy service' do
-      expect(chef_run).to start_service 'haproxy'
-    end
   end
 end
