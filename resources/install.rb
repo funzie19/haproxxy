@@ -29,15 +29,4 @@ action :configure do
       default_maxconn: new_resource.default_maxconn
     )
   end
-
-  # Start and enable
-  service 'haproxy' do
-    action [:enable, :start]
-  end
-end
-
-action :restart do
-  service 'haproxy' do
-    action :restart
-  end
 end

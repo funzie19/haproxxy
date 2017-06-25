@@ -3,14 +3,14 @@ source 'https://rubygems.org'
 gem 'rake'
 
 # style
-gem 'foodcritic'
 gem 'cookstyle'
+gem 'foodcritic'
 gem 'rubocop', require: false
 
 # unit
-gem 'rspec'
-gem 'chefspec'
 gem 'berkshelf'
+gem 'chefspec'
+gem 'rspec'
 
 # integration
 gem 'serverspec'

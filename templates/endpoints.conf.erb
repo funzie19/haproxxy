@@ -6,6 +6,6 @@ frontend <%= configs[:name] %>
 backend <%= configs[:backend_name] %>
     balance     roundrobin
     <% configs[:backends].each do | server, server_info | %>
-        server <%= server_info[:server_name] %> <%= server_info[:server_address] %>:<%= server_info[:server_port] %> <%= server_info[:extra_params] %>
+    server <%= server_info[:server_name] %> <%= server_info[:server_address] %>:<%= server_info[:server_port] %> <%= server_info[:extra_params] %>
     <% end %>
 <% end %>

@@ -7,6 +7,29 @@
 require 'spec_helper'
 
 describe 'haproxy::default' do
+  context 'When all attributes are default, on an CentOS 7.3' do
+    let(:chef_run) do
+      # for a complete list of available platforms and versions see:
+      # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
+      runner = ChefSpec::ServerRunner.new(platform: 'centos', version: '7.3.1611')
+      runner.converge(described_recipe)
+    end
+
+    it 'converges successfully' do
+      expect { chef_run }.to_not raise_error
+    end
+
+    it 'checks for custom resource to config' do
+      expect(chef_run).to config_haproxy_install('haproxy')
+    end
+
+    it 'checks for custom resource to set endpoints' do
+      expect(chef_run).to setup_endpoint_haproxy_endpoints('haproxy')
+    end
+  end
+end
+
+describe 'haproxy::default' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new(platform: 'centos', version: '7.3.1611', step_into: ['haproxy_install']).converge('haproxy::default')
   end
@@ -48,28 +71,5 @@ describe 'haproxy::default' do
       user: 'haproxy',
       group: 'haproxy'
     )
-  end
-end
-
-describe 'haproxy::default' do
-  context 'When all attributes are default, on an CentOS 7.3' do
-    let(:chef_run) do
-      # for a complete list of available platforms and versions see:
-      # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
-      runner = ChefSpec::ServerRunner.new(platform: 'centos', version: '7.3.1611')
-      runner.converge(described_recipe)
-    end
-
-    it 'converges successfully' do
-      expect { chef_run }.to_not raise_error
-    end
-
-    it 'checks for custom resource to config' do
-      expect(chef_run).to config_haproxy_install('haproxy')
-    end
-
-    it 'checks for custom resource to set endpoints' do
-      expect(chef_run).to setup_endpoint_haproxy_endpoints('haproxy')
-    end
   end
 end
