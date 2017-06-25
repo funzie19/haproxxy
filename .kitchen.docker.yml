@@ -6,11 +6,11 @@ provisioner:
 
 platforms:
   # https://hub.docker.com/_/centos/
-  - name: centos-7
+  - name: centos-7.3
 
 suites:
   - name: default
     run_list:
       - recipe[haproxy]
     includes:
-      - centos-7
+      - centos-7.3
