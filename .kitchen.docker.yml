@@ -7,6 +7,8 @@ provisioner:
 platforms:
   # https://hub.docker.com/_/centos/
   - name: centos-7.3
+    driver_config:
+      image: bento/centos-7.3
 
 suites:
   - name: default
