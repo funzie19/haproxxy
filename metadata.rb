@@ -1,7 +1,7 @@
 name 'haproxy'
 maintainer 'Joseph Kregloh'
 maintainer_email 'joseph@yourcgi.com'
-license 'All Rights Reserved'
+license 'MIT'
 description 'Installs/Configures haproxy'
 long_description 'Installs/Configures haproxy'
 version '0.1.0'
