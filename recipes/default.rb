@@ -4,12 +4,6 @@
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
-# TODO: The following checks
-# - Check config before start
-# - Restart after config check
-# - Seperate frontend?
-# - Restart after install
-
 haproxy_install 'haproxy' do
   action [:configure]
 end
