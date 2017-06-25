@@ -1,4 +1,5 @@
-property :endpoint_list, Hash, required: true, default: {}
+property :frontends, Hash, required: true, default: {}
+property :backends, Hash, required: true, default: {}
 property :template_source, String, name_property: true
 property :options_file_path, String, name_property: true
 
@@ -10,7 +11,8 @@ action :setup_endpoint do
     owner 'haproxy'
     group 'haproxy'
     variables(
-      endpoints: new_resource.endpoint_list
+      frontends: new_resource.frontends,
+      backends: new_resource.backends
     )
     cookbook 'haproxy'
   end

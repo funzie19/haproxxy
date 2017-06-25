@@ -2,7 +2,7 @@
 # Cookbook:: haproxy
 # Recipe:: default
 #
-# Copyright:: 2017, The Authors, All Rights Reserved.
+# Copyright:: 2017, Joseph Kregloh, All Rights Reserved.
 
 haproxy_install 'haproxy' do
   action [:configure]
@@ -11,16 +11,20 @@ end
 haproxy_endpoints 'haproxy' do
   template_source 'endpoints.conf.erb'
   options_file_path '/etc/haproxy/endpoints.conf'
-  endpoint_list(
+  frontends(
     'google' => {
       name: 'google_frontend',
       listen_ip: '*',
       listen_port: '80',
       backend_name: 'google_backend',
+    }
+  )
+  backends(
+    'google_backend' => {
       backend_params: [
         'balance roundrobin',
       ],
-      backends: {
+      available_backends: {
         'node0' => {
           server_name: 'google-node0',
           server_address: 'www.google.com',

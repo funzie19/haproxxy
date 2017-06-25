@@ -1,13 +1,15 @@
-<% @endpoints.each do | config_name, configs | %>
+<% @frontends.each do | config_name, configs | %>
 frontend <%= configs[:name] %>
     bind <%= configs[:listen_ip] %>:<%= configs[:listen_port] %>
     default_backend <%= configs[:backend_name] %>
+<% end %>
 
-backend <%= configs[:backend_name] %>
-    <% configs[:backend_params].each  do | param | %>
+<% @backends.each do | backend_name, backend_configs | %>
+backend <%= backend_name %>
+    <% backend_configs[:backend_params].each  do | param | %>
     <%= param %>
     <% end %>
-    <% configs[:backends].each do | server, server_info | %>
+    <% backend_configs[:available_backends].each do | server, server_info | %>
     server <%= server_info[:server_name] %> <%= server_info[:server_address] %>:<%= server_info[:server_port] %> <%= server_info[:extra_params] %>
     <% end %>
 <% end %>
