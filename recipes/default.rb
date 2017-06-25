@@ -18,7 +18,7 @@ haproxy_endpoints 'haproxy' do
       listen_port: '80',
       backend_name: 'google_backend',
       backend_params: [
-        'balance roundrobin'
+        'balance roundrobin',
       ],
       backends: {
         'node0' => {
