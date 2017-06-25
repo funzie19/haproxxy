@@ -19,14 +19,14 @@ describe port(80) do
   it { should be_listening }
 end
 
-describe command("curl -L http://127.0.0.1 | grep 'google'") do
-  its(:exit_status) { should eq 0 }
-end
+# describe command("curl -L http://127.0.0.1 | grep 'google'") do
+#   its(:exit_status) { should eq 0 }
+# end
 
-describe http('http://127.0.0.1/search?q=test') do
-  its('body') { should cmp /google/i }
-  its('status') { should_not eq '503' }
-end
+# describe http('http://127.0.0.1/search?q=test') do
+#   its('body') { should cmp /google/i }
+#   its('status') { should_not eq '503' }
+# end
 
 describe user('haproxy') do
   it { should exist }
