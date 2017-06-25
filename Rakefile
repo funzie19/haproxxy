@@ -9,7 +9,7 @@ require 'stove/rake_task'
 namespace :style do
   desc 'Run Ruby style checks'
   RuboCop::RakeTask.new do |task|
-    task.options << '--display-cop-names -r cookstyle'
+    task.options << '--display-cop-names'
   end
 
   desc 'Run Chef style checks'
