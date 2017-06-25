@@ -8,7 +8,7 @@ require 'spec_helper'
 
 describe 'haproxy::default' do
   let(:chef_run) do
-    ChefSpec::SoloRunner.new(step_into: ['haproxy_install']).converge('haproxy::default')
+    ChefSpec::SoloRunner.new(platform: 'centos', version: '7.3.1611', step_into: ['haproxy_install']).converge('haproxy::default')
   end
 
   it 'install haproxy package' do
@@ -33,7 +33,7 @@ end
 
 describe 'haproxy::default' do
   let(:chef_run) do
-    ChefSpec::SoloRunner.new(step_into: ['haproxy_endpoints']).converge('haproxy::default')
+    ChefSpec::SoloRunner.new(platform: 'centos', version: '7.3.1611', step_into: ['haproxy_endpoints']).converge('haproxy::default')
   end
 
   it 'creates endpoints file template' do
