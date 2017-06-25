@@ -14,8 +14,8 @@ install:
 
 script:
   - bundle exec rake style
-  - bundle exec rake unit
-#  - bundle exec kitchen test -d never
+  #- bundle exec rake unit
+  #- bundle exec kitchen test -d never
 
 env:
   global:

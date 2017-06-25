@@ -1,7 +1,7 @@
 require 'foodcritic'
 require 'kitchen'
 require 'rspec/core/rake_task'
-require "cookstyle"
+require 'cookstyle'
 require 'rubocop/rake_task'
 require 'stove/rake_task'
 
@@ -9,7 +9,7 @@ require 'stove/rake_task'
 namespace :style do
   desc 'Run Ruby style checks'
   RuboCop::RakeTask.new do |task|
-    task.options << "--display-cop-names"
+    task.options << '--display-cop-names -r cookstyle'
   end
 
   desc 'Run Chef style checks'
@@ -30,14 +30,6 @@ task unit: ['unit:spec']
 
 # Integration tests
 namespace :integration do
-  desc 'Run Test Kitchen with Vagrant'
-  task :vagrant do
-    Kitchen.logger = Kitchen.default_file_logger
-    Kitchen::Config.new.instances.each do |instance|
-      instance.test(:always)
-    end
-  end
-
   desc 'Run Test Kitchen with Docker'
   task :docker do
     Kitchen.logger = Kitchen.default_file_logger
@@ -50,7 +42,7 @@ namespace :integration do
 end
 
 desc 'Run all integration tests'
-task integration: ['integration:vagrant', 'integration:docker']
+task integration: ['integration:docker']
 
 # Publish
 Stove::RakeTask.new do |t|
