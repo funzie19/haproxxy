@@ -4,6 +4,7 @@ gem 'rake'
 
 # style
 gem 'foodcritic'
+gem 'cookstyle'
 gem 'rubocop', require: false
 
 # unit
