@@ -1,6 +1,7 @@
 require 'foodcritic'
 require 'kitchen'
 require 'rspec/core/rake_task'
+require "cookstyle"
 require 'rubocop/rake_task'
 require 'stove/rake_task'
 
