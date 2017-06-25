@@ -8,7 +8,6 @@ platforms:
   # https://hub.docker.com/_/centos/
   - name: centos-7.3
     driver_config:
-      image: milcom/centos7-systemd
       privileged: true
 
 suites:
