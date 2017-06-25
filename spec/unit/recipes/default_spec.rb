@@ -29,7 +29,7 @@ describe 'haproxy::default' do
   end
 end
 
-describe 'haproxy::default' do
+context 'Step into install resource' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new(platform: 'centos', version: '7.3.1611', step_into: ['haproxy_install']).converge('haproxy::default')
   end
@@ -54,7 +54,7 @@ describe 'haproxy::default' do
   end
 end
 
-describe 'haproxy::default' do
+context 'Step into endpoint resource' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new(platform: 'centos', version: '7.3.1611', step_into: ['haproxy_endpoints']).converge('haproxy::default')
   end
