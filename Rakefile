@@ -8,7 +8,7 @@ require 'stove/rake_task'
 # Style tests
 namespace :style do
   desc 'Run Ruby style checks'
-  RuboCop::RakeTask.new(:rubocop) do |t|
+  RuboCop::RakeTask.new do |t|
     t.options = ['-r cookstyle']
   end
 
