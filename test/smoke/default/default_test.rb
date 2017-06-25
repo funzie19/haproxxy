@@ -24,7 +24,7 @@ describe command("curl -L 127.0.0.1 | grep 'google'") do
 end
 
 describe http('http://127.0.0.1/search?q=test') do
-    its('body') { should cmp /google/i }
+  its('body') { should cmp /google/i }
 end
 
 describe user('haproxy') do
